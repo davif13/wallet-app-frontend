@@ -1,3 +1,58 @@
+const renderFinancesList = (data) => {
+  const table = document.getElementById("finances-table");
+  /*
+            <tr>
+            <td>Item1</td>
+            <td>Item2</td>
+            <td>Item3</td>
+            <td class="center">Item4</td>
+            <td class="right">Item5</td>
+          </tr>
+  */
+  data.map ((item) => {
+    const tableRow = document.createElement("tr");
+    tableRow.className = 'mt smaller';
+
+    // render title of item
+    const titleTd = document.createElement("td");
+    const titleText = document.createTextNode(item.title);
+    titleTd.appendChild(titleText);
+    tableRow.appendChild(titleTd);
+
+    // render category of item
+    const categoryTd = document.createElement("td");
+    const categoryText = document.createTextNode(item.name);
+    categoryTd.appendChild(categoryText);
+    tableRow.appendChild(categoryTd);
+
+    // render date of item
+    const dateTd = document.createElement("td");
+    const dateText = document.createTextNode(new Date(item.date).toLocaleDateString());
+    dateTd.appendChild(dateText);
+    tableRow.appendChild(dateTd);
+    
+    // render value of item
+    const valueTd = document.createElement("td");
+    const valueText = document.createTextNode(new Intl.NumberFormat(
+      "pt-BR", 
+      { style: "currency", currency: "BRL",})
+      .format(item.value));
+    valueTd.className = 'center';
+    valueTd.appendChild(valueText);
+    tableRow.appendChild(valueTd);
+
+    // delete action
+    const deleteTd = document.createElement("td");
+    const deleteText = document.createTextNode("Deletar");
+    deleteTd.className = 'right';
+    deleteTd.appendChild(deleteText);
+    tableRow.appendChild(deleteTd);
+
+    // table append
+    table.appendChild(tableRow);
+  })
+}
+
 const renderFinanceElements = (data) => {
   const totalItems = data.length;
   const revenues = data
@@ -68,6 +123,7 @@ const onLoadFinancesData = async () => {
   );
   const data = await result.json();
   renderFinanceElements(data);
+  renderFinancesList(data);
   return data;
   } catch (error) {
     return { error };
