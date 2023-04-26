@@ -6,29 +6,29 @@ This is a web application that helps users manage their personal finances. The a
 
 The application provides the following features:
 
-Login with email
-View monthly balance
-View total revenue and expenses for the month
-Add new entries
-Delete existing entries
+Login with email <br>
+View monthly balance <br>
+View total revenue and expenses for the month <br>
+Add new entries <br>
+Delete existing entries<br>
 
 ## Technologies
 
 The following technologies were used to build this application:
 
-HTML
-CSS
-JavaScript
-API (to store and retrieve financial information)
+HTML <br>
+CSS <br>
+JavaScript <br>
+API (to store and retrieve financial information) <br>
 
 ## Usage
 
 To use this application, simply follow these steps:
 
-Clone this repository to your local machine.
-Open index.html in your web browser.
-Log in with your email. (If you don't want to use your e-mail, use davidavi@davidavi.com)
-Use the interface to view your monthly balance and add/delete entries.
+Clone this repository to your local machine. <br>
+Open index.html in your web browser. <br>
+Log in with your email. (If you don't want to use your e-mail, use davidavi@davidavi.com) <br>
+Use the interface to view your monthly balance and add/delete entries. <br>
 
 ## Deployment (Live Link)
 
