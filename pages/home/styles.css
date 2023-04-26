@@ -127,3 +127,40 @@ td.right {
 td.center {
   text-align: center;
 }
+
+tr {
+  height: 32px;
+}
+
+.modal-background {
+  display: none;
+  flex-direction: column;
+  align-items: flex-end;
+  position: fixed;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(1, 4, 0, 0.2);
+}
+
+.modal-content {
+  height: 100%;
+  width: 480px;
+  background-color: #F4F4F9;
+  padding: 24px;
+  box-sizing: border-box;
+}
+
+.modal-content-header {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+}
+
+input {
+  margin-bottom: 20px;
+}

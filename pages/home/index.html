@@ -19,34 +19,43 @@
     </div>
     <div class="finance-card-container">
       <div id="finance-card-1" class="finance-card">
-        <h3>Total de Lançamentos</h3>
       </div>
       <div id="finance-card-2" class="finance-card">
-        <h3>Receitas</h3>
       </div>
       <div id="finance-card-3" class="finance-card">
-        <h3>Despesas</h3>
       </div>
       <div id="finance-card-4" class="finance-card">
-        <h3>Balanço</h3>
       </div>
     </div>
     <div class="table-container">
       <div class="table-content-container">
         <div class="table-content-header">
           <h2>Últimos Lançamentos</h2>
-          <button class="small">Adicionar</button>
+          <button onclick="onOpenModal()" class="small">Adicionar</button>
         </div>
         <table id="finances-table">
-          <tr>
-            <th>Título</th>
-            <th>Categoria</th>
-            <th>Data</th>
-            <th class="center">Valor</th>
-            <th class="right">Ação</th>
-          </tr>
         </table>
       </div>
+    </div>
+  </div>
+  <div id="modal" class="modal-background">
+    <div class="modal-content">
+      <div class="modal-content-header">
+        <h3>Adicionar Lançamento</h3>
+        <button onclick="onCloseModal()" class="small">Fechar</button>
+      </div>
+      <form id="form-finance-release" class="mt">
+        <label class="mt" for="input-title">Título</label>
+        <input placeholder="Ex: Conta de energia" class="mt smaller" id="input-title" type="text" name="input-title"
+        required />
+        <label class="mt" for="input-value">Valor</label>
+        <input placeholder="R$ 0,00 (Use valores negativos para despesas)" class="mt smaller" id="input-value" type="number" step="any" name="input-value" required />
+        <label class="mt" for="input-date">Data</label>
+        <input placeholder="DD/MM/AAAA" class="mt smaller" id="input-date" type="date" name="input-date" required />
+        <label class="mt" for="input-category">Categoria</label>
+        <select class="mt smaller" id="input-category" name="input-category" required></select>
+        <button type="submit" class="full-width mt large">Adicionar</button>
+       </form>
     </div>
   </div>
 </body>

@@ -1,14 +1,38 @@
 const renderFinancesList = (data) => {
   const table = document.getElementById("finances-table");
-  /*
-            <tr>
-            <td>Item1</td>
-            <td>Item2</td>
-            <td>Item3</td>
-            <td class="center">Item4</td>
-            <td class="right">Item5</td>
-          </tr>
-  */
+  table.innerHTML = "";
+
+  const tableHeader = document.createElement("tr");
+
+  const titleElement = document.createElement("th");
+  const titleText = document.createTextNode("Título");
+  titleElement.appendChild(titleText);
+  tableHeader.appendChild(titleElement);
+
+  const categoryElement = document.createElement("th");
+  const categoryText = document.createTextNode("Categoria");
+  categoryElement.appendChild(categoryText);
+  tableHeader.appendChild(categoryElement);
+
+  const dateElement = document.createElement("th");
+  const dateText = document.createTextNode("Data");
+  dateElement.appendChild(dateText);
+  tableHeader.appendChild(dateElement);
+
+  const valueElement = document.createElement("th");
+  const valueText = document.createTextNode("Valor");
+  valueElement.className = 'center';
+  valueElement.appendChild(valueText);
+  tableHeader.appendChild(valueElement);
+
+  const actionElement = document.createElement("th");
+  const actionText = document.createTextNode("Ação");
+  actionElement.className = 'right';
+  actionElement.appendChild(actionText);
+  tableHeader.appendChild(actionElement);
+
+  table.appendChild(tableHeader);
+
   data.map ((item) => {
     const tableRow = document.createElement("tr");
     tableRow.className = 'mt smaller';
@@ -65,6 +89,13 @@ const renderFinanceElements = (data) => {
 
   // render total items
   const financeCard1 = document.getElementById("finance-card-1");
+  financeCard1.innerHTML = "";
+
+  const totalSubtextElement = document.createElement("h3");
+  const totalSubtext = document.createTextNode("Total de Lançamentos")
+  totalSubtextElement.appendChild(totalSubtext);
+  financeCard1.appendChild(totalSubtextElement);
+
   const totalItemsElement = document.createElement("h1");
   const totalItemsText = document.createTextNode(totalItems);
   totalItemsElement.className = 'mt smaller';
@@ -73,6 +104,13 @@ const renderFinanceElements = (data) => {
 
   // render revenues
   const financeCard2 = document.getElementById("finance-card-2");
+  financeCard2.innerHTML = "";
+
+  const revenuesSubtextElement = document.createElement("h3");
+  const revenuesSubtext = document.createTextNode("Receitas")
+  revenuesSubtextElement.appendChild(revenuesSubtext);
+  financeCard2.appendChild(revenuesSubtextElement);
+
   const revenuesElement = document.createElement("h1");
   const revenuesText = document.createTextNode(
     new Intl.NumberFormat(
@@ -85,6 +123,13 @@ const renderFinanceElements = (data) => {
 
   // render expenses
   const financeCard3 = document.getElementById("finance-card-3");
+  financeCard3.innerHTML = "";
+
+  const expensesSubtextElement = document.createElement("h3");
+  const expensesSubtext = document.createTextNode("Despesas")
+  expensesSubtextElement.appendChild(expensesSubtext);
+  financeCard3.appendChild(expensesSubtextElement);
+
   const expensesElement = document.createElement("h1");
   const expensesText = document.createTextNode(
     new Intl.NumberFormat(
@@ -97,6 +142,13 @@ const renderFinanceElements = (data) => {
 
   // render balance
   const financeCard4 = document.getElementById("finance-card-4");
+  financeCard4.innerHTML = "";
+
+  const totalValueSubtextElement = document.createElement("h3");
+  const totalValueSubtext = document.createTextNode("Balanço")
+  totalValueSubtextElement.appendChild(totalValueSubtext);
+  financeCard4.appendChild(totalValueSubtextElement);
+
   const totalValueElement = document.createElement("h1");
   const totalValueText = document.createTextNode(
     new Intl.NumberFormat(
@@ -156,7 +208,95 @@ const onLoadUserInfo = () => {
   navbarUserAvatar.appendChild(avatarElement);
 }
 
+const onLoadCategories = async () => {
+  try {
+    const categoriesSelect = document.getElementById("input-category");
+    const response = await fetch('https://mp-wallet-app-api.herokuapp.com/categories');
+    const categoriesResult = await response.json();
+    categoriesResult.map((category) => {
+      const option = document.createElement("option");
+      const categoryText = document.createTextNode(category.name);
+      option.id = `category_${category.id}`;
+      option.value = category.id;
+      option.appendChild(categoryText);
+      categoriesSelect.appendChild(option);
+    })
+  } catch (error) {
+    alert("Erro ao carregar categorias.");
+  }
+}
+
+const onOpenModal = () => {
+  const modal = document.getElementById('modal');
+  modal.style.display = "flex";
+}
+
+const onCloseModal = () => {
+  const modal = document.getElementById('modal');
+  modal.style.display = "none";
+}
+
+const onCallAddFinance = async (data) => {
+  try {
+    
+    const email = localStorage.getItem("@WalletApp:userEmail");
+
+    const response = await fetch("https://mp-wallet-app-api.herokuapp.com/finances",
+    {
+      method: "POST",
+      mode: "cors",
+      cache: "no-cache",
+      credentials: "same-origin",
+      headers: {
+        "Content-Type": "application/json",
+        email: email,
+      },
+      body: JSON.stringify(data),
+    }
+    );
+
+    const user = await response.json();
+    return user;
+
+  } catch (error) {
+    return { error }
+  }
+};
+
+const onCreateFinanceRelease = async (target) => {
+  try {
+    const title = target[0].value;
+    const value = Number(target[1].value);
+    const date = target[2].value;
+    const category = Number(target[3].value);
+    const result = await onCallAddFinance({
+      title,
+      value,
+      date,
+      category_id: category,
+    });
+
+    console.log(result);
+    
+    if (result.error) {
+      alert("Erro ao adicionar novo dado financeiro.");
+      return;
+    }
+    onCloseModal();
+    onLoadFinancesData();
+  } catch (error) {
+    alert("Erro ao adicionar novo dado financeiro.");
+  }
+}
+
 window.onload = () => {
   onLoadUserInfo();
   onLoadFinancesData();
+  onLoadCategories();
+
+  const form = document.getElementById('form-finance-release')
+  form.onsubmit = (event) => {
+    event.preventDefault();
+    onCreateFinanceRelease(event.target);
+  }
 }
