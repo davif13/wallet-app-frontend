@@ -110,9 +110,11 @@ const renderFinanceElements = (data) => {
   const revenues = data
   .filter(item => Number(item.value) > 0)
   .reduce((acc, item) => acc + Number(item.value), 0);
+  localStorage.setItem('@WalletApp:userRevenues', revenues);
   const expenses = data
   .filter(item => Number(item.value) < 0)
   .reduce((acc, item) => acc + Number(item.value), 0);
+  localStorage.setItem('@WalletApp:userExpenses', expenses);
   const totalValue = revenues + expenses;
 
   // render total items
@@ -188,6 +190,28 @@ const renderFinanceElements = (data) => {
   totalValueElement.appendChild(totalValueText);
   financeCard4.appendChild(totalValueElement);
 
+  // render chart
+  const chartScript = document.getElementById('chart-script');
+  const chartElement = document.createElement('script');
+  const chartText = document.createTextNode(`const myChart = document.getElementById('finance-chart');
+  
+  new Chart (
+    myChart,
+    {
+      type: 'pie',
+      data: {
+        labels: ['Receitas', 'Despesas'],
+        datasets: [{
+          label: 'Receitas',
+          data: [${revenues}, ${expenses}],
+          backgroundColor: ['rgb(54, 162, 235)', 'rgb(255, 99, 132)'],
+          hoverOffset: 4
+        }]
+      }
+    }
+  );`)
+  chartElement.appendChild(chartText);
+  chartScript.appendChild(chartElement);
 }
 
 const onLoadFinancesData = async () => {
