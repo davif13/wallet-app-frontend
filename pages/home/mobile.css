@@ -1,0 +1,100 @@
+@media only screen and (max-device-width: 480px) {
+  .home-content-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 100vw;
+    height: auto;
+    min-height: 100vh;
+    background-color: #F4F4F9;
+  }
+
+  .navbar {
+    display: flex;
+    flex-direction: row;
+    align-items: baseline;
+    justify-content: space-between;
+    width: 100vw;
+    height: 72px; 
+    padding: 15px 15px;
+    text-align: center;
+  }
+
+  .navbar-calendar-container {
+    margin: 5px;
+  }
+
+  .input-calendar {
+    width: 135px;
+    font-size: 1rem;
+  }
+
+  .navbar-user-container {
+    flex-direction: column;
+    justify-content: center;
+    width: 75px;
+  }
+
+  .user-email {
+    display: none;
+  }
+
+  .logout-element {
+    display: none;
+  }
+
+  .info-container {
+    flex-direction: column;
+}
+
+.finance-card-container {
+    grid-template-columns: repeat(1, 1fr);
+    grid-template-rows: repeat(4, 1fr);
+    padding: 25px 25px;
+}
+
+.finance-card {
+  width: 200px;
+  height: 120px;
+}
+
+.canvas-container {
+  width: 290px;
+}
+
+.table-container {
+  display: flex;
+  width: 100%;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: flex-start;
+  padding: 0px 10px;
+  box-sizing: border-box;
+}
+
+h1 {
+  font-size: 1.87rem;
+}
+
+h3 {
+  font-size: 1rem;
+}
+
+table {
+  width: 100%;
+}
+
+th {
+  font-size: 0.8rem;
+}
+
+td {
+  font-size: 0.785rem;
+}
+
+.modal-content {
+  width: 80vw;
+}
+
+}

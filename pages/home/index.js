@@ -244,6 +244,7 @@ const onLoadUserInfo = () => {
   // add user email to navbar
   const emailElement = document.createElement("p");
   const emailText = document.createTextNode(email);
+  emailElement.className = "user-email";
   emailElement.appendChild(emailText);
   navbarUserInfo.appendChild(emailElement);
 
@@ -252,12 +253,15 @@ const onLoadUserInfo = () => {
   logoutElement.onclick = () => onLogout();
   logoutElement.style.cursor = "pointer";
   const logoutText = document.createTextNode("sair");
+  logoutElement.className = "logout-element";
+  logoutElement.id = "logout-element";
   logoutElement.appendChild(logoutText);
   navbarUserInfo.appendChild(logoutElement);
 
   // add user first letter inside avatar
   const avatarElement = document.createElement("h3");
   const avatarText = document.createTextNode(name.charAt(0).toUpperCase());
+  avatarElement.id = "avatar-element";
   avatarElement.appendChild(avatarText);
   navbarUserAvatar.appendChild(avatarElement);
 }
@@ -352,11 +356,45 @@ const setInitialDate = () => {
   })
 }
 
+const logoutElementDisplay = () => {
+  const logoutElement = document.getElementById('logout-element');
+
+  if (logoutElement.style.display === "none") {
+    logoutElement.style.display = "flex";
+  } else {
+    logoutElement.style.display = "none";
+  }
+}
+
+const addAvatarListener = () => {
+  const avatarElement = document.getElementById('avatar-element');
+
+  avatarElement.addEventListener("click", logoutElementDisplay);
+}
+
+const removeAvatarListener = () => {
+  const avatarElement = document.getElementById('avatar-element');
+
+  avatarElement.removeEventListener("click", logoutElementDisplay);
+}
+
+const checkWindowSize = () => {
+  const logoutElement = document.getElementById('logout-element');
+
+  if (window.innerWidth <= 480) {
+    addAvatarListener();
+  } else {
+    removeAvatarListener();
+    logoutElement.style.display = "flex";
+  }
+} 
+
 window.onload = () => {
   setInitialDate();
   onLoadUserInfo();
   onLoadFinancesData();
   onLoadCategories();
+  checkWindowSize();
 
   const form = document.getElementById('form-finance-release')
   form.onsubmit = (event) => {
@@ -364,3 +402,5 @@ window.onload = () => {
     onCreateFinanceRelease(event.target);
   }
 }
+
+window.addEventListener("resize", checkWindowSize);
