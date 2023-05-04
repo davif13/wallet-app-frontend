@@ -83,6 +83,28 @@
   background-color: #FFFFFF;
 }
 
+canvas {
+  width: 250px;
+  height: 250px;
+}
+
+.canvas-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 50px;
+  width: 310px;
+  background-color: #FFFFFF;
+  border-radius: 24px;
+}
+
+.info-container {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-start;
+}
+
 .table-container {
   display: flex;
   width: 100%;
@@ -180,27 +202,4 @@ tr {
 
 input {
   margin-bottom: 20px;
-}
-
-canvas {
-  width: 250px;
-  height: 250px;
-}
-
-.canvas-container {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  margin-top: 20px;
-  margin-bottom: 20px;
-  width: 310px;
-  background-color: #FFFFFF;
-  border-radius: 24px;
-}
-
-.info-container {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: center;
 }
