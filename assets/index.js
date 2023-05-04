@@ -25,3 +25,14 @@ onClickLogin = async () => {
   localStorage.setItem("@WalletApp:userId", result.id);
   window.open("./pages/home/index.html", "_self");
 }
+
+window.onload = () => {
+  const emailInput = document.getElementById("input-email");
+
+  emailInput.addEventListener("keypress", function(event) {
+    if (event.key === "Enter") {
+      event.preventDefault();
+      onClickLogin();
+    }
+  })
+}

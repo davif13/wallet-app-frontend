@@ -94,6 +94,7 @@ const renderFinancesList = (data) => {
     // delete action
     const deleteTd = document.createElement("td");
     deleteTd.style.cursor = "pointer";
+    deleteTd.style.color = "#5936CD"
     deleteTd.onclick = () => onDeleteItem(item.id);
     const deleteText = document.createTextNode("Deletar");
     deleteTd.className = 'right';
