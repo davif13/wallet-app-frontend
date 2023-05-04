@@ -2,6 +2,8 @@
 
 This is a web application that helps users manage their personal finances. The application is built with HTML, CSS and JavaScript, and it uses an API to store and retrieve financial and e-mail information.
 
+![Live deploy Wallet App](./assets/capture.jpg)
+
 ## :wrench: Features
 
 The application provides the following features:
