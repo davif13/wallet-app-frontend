@@ -11,6 +11,7 @@ The application provides the following features:
 Login with email <br>
 View monthly balance <br>
 View total revenue and expenses for the month <br>
+Change the month<br>
 Add new entries <br>
 Delete existing entries<br>
 View your balance in a chart
